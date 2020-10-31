@@ -1,0 +1,24 @@
+{% extends "public/templates/public_templates.html" %}
+
+{% block title %} ATTESTATION CRÉÉE! {% endblock %}
+
+{% block styles %}
+h1 {
+    color:white;
+    margin-top: 2%;
+    margin-bottom: 4%;
+    }
+{% endblock %}
+
+{% block contenu %}
+<center>
+    {% if nb_attestations==1 %}
+        <h1>Attestation créée</h1>
+        <a class="btn btn-primary" href="{{ url_for('static',filename='text/Nouvelle_Attestation_1.docx') }}" download>Cliquer ici pour télécharger la nouvelle attestation</a>
+    {% else %}
+        <h1>Attestations créées ({{nb_attestations}})</h1>
+        <a class="btn btn-primary" href="{{ url_for('static',filename='text/Attestations.zip') }}" download>Cliquer ici pour télécharger les {{nb_attestations}} nouvelles attestations</a>
+    {% endif %}
+
+</center>
+{% endblock %}

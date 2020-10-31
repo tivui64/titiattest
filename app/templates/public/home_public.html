@@ -1,0 +1,27 @@
+{% extends "public/templates/public_templates.html" %}
+
+{% block title %} Attestation accueil {% endblock %}
+
+{% block styles %}
+    .title {
+    color: white;
+    margin-top: 2%;
+    }
+    .button {
+        margin-top: 5%;
+        }
+{% endblock %}
+
+{% block contenu %}
+<div class="title">
+    <center>
+        <h1>Attestation de déplacement dérogatoire</h1>
+    </center>
+</div>
+<div class="button">
+    <center>
+        <a class="btn btn-primary" href="http://127.0.0.1:5000/formulaire" role="button">Clique ici pour créer ton attestation</a>
+    </center>
+</div>
+{% endblock %}
+

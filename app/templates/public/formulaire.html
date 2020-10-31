@@ -1,0 +1,86 @@
+{% extends "public/templates/public_templates.html" %}
+
+{% block title %} Création de l'attestation {% endblock %}
+
+{% block styles %}
+.formulaire {
+margin-top:20px;
+}
+{% endblock %}
+
+{% block contenu %}
+<div style="color:white;" >
+<div class="container my-5">
+       <div class="card-body text-center">
+           <h1 class="card-title"><b>Création de l'attestation de déplacement</b></h1>
+        </div>
+<form action="http://127.0.0.1:5000//creation_attestation" method="post" class="formulaire">
+    <div class="form-row">
+        <div class="form-group col-md-12">
+            <label for="nom"><b>Choisis ton nom dans la liste déroulante</b></label>
+					<select class='form-control' name="nom" id="nom" >
+                        <option value="andre">André Vuillermet</option>
+                        <option value="francoise">Françoise Vuillermet</option>
+                        <option value="thierry">Thierry Vuillermet</option>
+                    </select>
+        </div>
+    </div>
+
+
+    <div class="form-row">
+        <div class="form-group col-md-10">
+            <label for="motif"><b>Ton motif de sortie</b></label>
+					<select class='form-control' name="motif" id="motif"  onclick="Afficher_Dates();return false;" required >
+                        <option value="courses">Déplacements pour faire des courses de première necessité.</option>
+                        <option value="medical">Consultation médicale ou achat de médicaments.</option>
+                        <option value="sport">Déplacement pour activité sportive ou promenade chien.</option>
+                        <option value="justice">Convocation judiciaire ou administrative et pour se rendre dans un service public.</option>
+                    </select>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-md-4">
+            <label for="heure_de_depart"><b>Heure et date de départ</b></label>
+                        <input id="heure_de_depart" type="datetime-local" name="heure_de_depart">
+        </div>
+        <div class="form-group col-md-4" id="date_de_retour" style="display:block;">
+            <label for="heure_de_retour"><b>Heure de retour</b></label>
+                        <input id="heure_de_retour" type="time" name="heure_de_retour">
+        </div>
+
+
+    </div>
+
+<input  type="submit" class="btn btn-success" value="Valider les informations" >
+</form>
+<script>
+    function Afficher_Dates() {
+        var choice = document.getElementById("motif");
+        var choice_value = choice.options[choice.selectedIndex].value;
+        if (choice_value=="sport")
+            {document.getElementById("date_de_retour").style.display='block';}
+        else if (choice_value=="courses")
+            {document.getElementById("date_de_retour").style.display='block';}
+        else {document.getElementById("date_de_retour").style.display='none';}
+        }
+    window.addEventListener("load", function() {
+        var now = new Date();
+        var utcString = now.toISOString().substring(0,19);
+        var year = now.getFullYear();
+        var month = now.getMonth() + 1;
+        var day = now.getDate();
+        var hour = now.getHours();
+        var minute = now.getMinutes();
+        var localDatetime = year + "-" +
+                          (month < 10 ? "0" + month.toString() : month) + "-" +
+                          (day < 10 ? "0" + day.toString() : day) + "T" +
+                          (hour < 10 ? "0" + hour.toString() : hour) + ":" +
+                          (minute < 10 ? "0" + minute.toString() : minute)
+        var datetimeField = document.getElementById("heure_de_depart");
+        datetimeField.value = localDatetime;
+    });
+</script>
+</div>
+</div>
+{% endblock %}
